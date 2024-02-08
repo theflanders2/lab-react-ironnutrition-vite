@@ -1,5 +1,5 @@
 
-function FoodBox({ food }) {
+function FoodBox({ food, removeFoodItem }) {
   return (
     <div>
         <p>{food.name}</p>
@@ -13,7 +13,7 @@ function FoodBox({ food }) {
             <b>Total Calories: {food.calories * food.servings} </b> kcal
         </p>
 
-        <button>Delete</button>
+        <button onClick={() => removeFoodItem(food.id)}>Delete</button>
     </div>
   );
 }
