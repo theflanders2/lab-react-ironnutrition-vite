@@ -10,7 +10,11 @@ function App() {
   return (
     <div className="App">
       <h1>LAB | React IronNutrition</h1>
-      <FoodBox food={foods[0]} />
+      {foods.map(foodItem => {
+          return (
+            <FoodBox food={foodItem} />
+          )
+      })}
     </div>
   );
 }
