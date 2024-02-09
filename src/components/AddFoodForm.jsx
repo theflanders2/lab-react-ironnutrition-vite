@@ -38,7 +38,7 @@ function AddFoodForm({ addFood }) {
 
     return (
         <div className="AddFood">
-        <h4>Add Food Entry</h4>
+        <h1>Add Food Entry</h1>
         <form onSubmit={handleSubmit}> 
           <label>Name:</label>
           <input 
