@@ -2,6 +2,7 @@ import "./App.css";
 import foodsJson from "./foods.json";
 import { useState } from "react";
 import FoodBox from "./components/FoodBox";
+import AddFoodForm from "./components/AddFoodForm";
 
 function App() {
 
@@ -14,9 +15,19 @@ function App() {
     setFoods(foodListAfterDelete);
   };
 
+  /*-----ADD NEW FOOD ITEM AND UPDATE STATE-----*/
+  const addNewFood = (newFood) => {
+    const updatedFoodsList = [...foods, newFood]; // Add the newFood argument at the end of the list of foods
+    // const updatedMoviesData = [...moviesData, movie]; 
+
+    setFoods(updatedFoodsList); // update the state variable "foods" with updatedFoodsList
+    // setMoviesData(updatedMoviesData); 
+};
+
   return (
     <div className="App">
       <h1>LAB | React IronNutrition</h1>
+      <AddFoodForm addFood={addNewFood} />
       {foods.map(foodItem => {
           return (
             <FoodBox
