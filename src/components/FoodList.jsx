@@ -22,15 +22,16 @@ function FoodList() {
     };
 
     /*-----FILTER FOODS LIST FOR SEARCH PURPOSES-----*/
-    const filterFoodsList = (str) => {
-        let filteredFoods;
-        if (str === "All") { // resetting the list of food to all the foods
-        filteredFoods = foods;
+    const handleOnChange = (value) => {
+
+        let filteredFoods
+        if (value.length === 0) {
+            filteredFoods = foodsJson; // reset the list of food to the foods variable
         }
-        else { // filter out the foods that don't match the selected option
-        filteredFoods = foods.filter((foodItem) => {
-            return foodItem.name[0].toLowerCase() === str.toLowerCase();
-          });
+        else {
+            filteredFoods = foodsJson.filter((foodItem) => {
+                return foodItem.name.toLowerCase().includes(value.toLowerCase());
+            })
         }
 
         setFoods(filteredFoods); // update the state variable 'foods'
@@ -38,9 +39,10 @@ function FoodList() {
 
     return (
         <div className="App">
-        <Search filterFoods={filterFoodsList}/>
+        <Search filterFoods={handleOnChange}/>
         <AddFoodForm addFood={addNewFood} />
-        {foods.map(foodItem => {
+        {foods.length === 0 ? <h2>Oops! There is no more content to show.</h2> :
+            foods.map(foodItem => {
             return (
                 <FoodBox
                 key={foodItem.id}

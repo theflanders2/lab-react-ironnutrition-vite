@@ -1,5 +1,5 @@
 
-function FoodBox({ food, removeFoodItem }) {
+function FoodBox({ food, removeFoodItem, message }) {
   return (
     <div>
         <p>{food.name}</p>
@@ -14,6 +14,7 @@ function FoodBox({ food, removeFoodItem }) {
         </p>
 
         <button onClick={() => removeFoodItem(food.id)}>Delete</button>
+        <h2>{message && "Oops! There is no more content to show."}</h2>
     </div>
   );
 }
