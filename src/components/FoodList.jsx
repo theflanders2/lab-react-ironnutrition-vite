@@ -6,12 +6,14 @@ import Search from "./Search";
 
 function FoodList() {
     const [foods, setFoods] = useState(foodsJson);
+    const [foodsData, setFoodsData] = useState(foodsJson);
 
     /*-----REMOVE A FOOD AND UPDATE STATE-----*/ 
     const removeFoodItem = (id) => {
         // all foods, whose id does not match the id clicked on will remain in the list
         const foodListAfterDelete = foods.filter(foodItem => foodItem.id !== id);
         setFoods(foodListAfterDelete);
+        setFoodsData(foodListAfterDelete);
     };
 
     /*-----ADD NEW FOOD ITEM AND UPDATE STATE-----*/
@@ -19,6 +21,7 @@ function FoodList() {
         const updatedFoodsList = [...foods, newFood]; // Add the newFood argument at the end of the list of foods
 
         setFoods(updatedFoodsList); // update the state variable "foods" with updatedFoodsList
+        setFoodsData(updatedFoodsList);
     };
 
     /*-----FILTER FOODS LIST FOR SEARCH PURPOSES-----*/
@@ -26,10 +29,10 @@ function FoodList() {
 
         let filteredFoods
         if (value.length === 0) {
-            filteredFoods = foodsJson; // reset the list of food to the foods variable
+            filteredFoods = foodsData; // reset the list of food to the foods variable
         }
         else {
-            filteredFoods = foodsJson.filter((foodItem) => {
+            filteredFoods = foodsData.filter((foodItem) => {
                 return foodItem.name.toLowerCase().includes(value.toLowerCase());
             })
         }
