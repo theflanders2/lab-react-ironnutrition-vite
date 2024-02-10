@@ -2,6 +2,7 @@ import foodsJson from "../foods.json";
 import { useState } from "react";
 import FoodBox from "./FoodBox";
 import AddFoodForm from "./AddFoodForm";
+import Search from "./Search";
 
 function FoodList() {
     const [foods, setFoods] = useState(foodsJson);
@@ -16,14 +17,28 @@ function FoodList() {
     /*-----ADD NEW FOOD ITEM AND UPDATE STATE-----*/
     const addNewFood = (newFood) => {
         const updatedFoodsList = [...foods, newFood]; // Add the newFood argument at the end of the list of foods
-        // const updatedMoviesData = [...moviesData, movie]; 
 
         setFoods(updatedFoodsList); // update the state variable "foods" with updatedFoodsList
-        // setMoviesData(updatedMoviesData); 
+    };
+
+    /*-----FILTER FOODS LIST FOR SEARCH PURPOSES-----*/
+    const filterFoodsList = (str) => {
+        let filteredFoods;
+        if (str === "All") { // resetting the list of food to all the foods
+        filteredFoods = foods;
+        }
+        else { // filter out the foods that don't match the selected option
+        filteredFoods = foods.filter((foodItem) => {
+            return foodItem.name[0].toLowerCase() === str.toLowerCase();
+          });
+        }
+
+        setFoods(filteredFoods); // update the state variable 'foods'
     };
 
     return (
         <div className="App">
+        <Search filterFoods={filterFoodsList}/>
         <AddFoodForm addFood={addNewFood} />
         {foods.map(foodItem => {
             return (
